@@ -1,0 +1,332 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>OPAS｜油絵技能認証 スターター作品募集</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables & Reset --- */
+    :root {
+      --color-primary: #5b1f2b; /* 元のえんじ色 */
+      --color-primary-dark: #3a131b;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-bg: #f9f8f6; /* 少し温かみのあるオフホワイト */
+      --color-white: #ffffff;
+      --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+      --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    /* --- Header (Hero Section) --- */
+    header {
+      /* 油絵の背景画像を設定（落ち着いた雰囲気のものを選択） */
+      background-image: url('https://images.unsplash.com/photo-1506812574917-629b5566a745?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      color: var(--color-white);
+      padding: 100px 20px; /* 上下の余白を広げてゆったりと */
+      text-align: center;
+      position: relative;
+    }
+
+    /* 背景画像の上に重ねる半透明のレイヤー */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* えんじ色ベースの暗いグラデーションで深みを出す */
+      background: linear-gradient(to bottom, rgba(91, 31, 43, 0.85), rgba(91, 31, 43, 0.7));
+      z-index: 1;
+    }
+
+    header h1, header p {
+      position: relative;
+      z-index: 2; /* レイヤーより上に表示 */
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* --- Layout & Typography --- */
+    section {
+      max-width: 900px; /* 少し幅を狭めて読みやすく */
+      margin: 60px auto; /* セクション間の余白を広げる */
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      color: var(--color-primary);
+      border-left: 6px solid var(--color-primary);
+      padding-left: 15px;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      line-height: 1.4;
+    }
+
+    /* 箇条書きのスタイル調整 */
+    ul {
+      padding-left: 20px;
+      margin: 20px 0;
+    }
+    
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    /* --- Components --- */
+    .card {
+      background: var(--color-white);
+      padding: 40px; /* 内側の余白をたっぷり取る */
+      border-radius: 12px;
+      /* 柔らかく広がる影に変更 */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid #e0e0e0; /* 枠線を薄く */
+      padding: 15px; /* セルの余白を広げる */
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: var(--color-primary); /* ヘッダーをえんじ色に */
+      color: var(--color-white);
+      font-weight: normal;
+      font-family: var(--font-serif);
+    }
+
+    /* 最初の列（項目名）のスタイル */
+    tr th:first-child {
+      background-color: #f4f4f4;
+      color: var(--color-text);
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      text-decoration: none;
+      border-radius: 50px; /* 丸みのあるボタン */
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(91, 31, 43, 0.3);
+    }
+
+    .btn:hover {
+      background-color: var(--color-primary-dark);
+      box-shadow: 0 6px 15px rgba(91, 31, 43, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: #333; /* 暗い背景で引き締める */
+      color: #aaa;
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 80px;
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 600px) {
+      header {
+        padding: 60px 20px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 25px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      /* スマホでテーブルが横にはみ出さないようにスクロールさせる */
+      .card {
+        overflow-x: auto;
+      }
+      table {
+        min-width: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OPAS｜油絵技能認証</h1>
+  <p>Oil Painting Art Skills Certification</p>
+</header>
+
+<section>
+  <h2>このような方に向いています</h2>
+  <div class="card">
+    <ul>
+      <li>公募展や受賞歴はないが、長く油絵を描き続けてきた方</li>
+      <li>ご家族が管理している大切な油絵作品を、きちんと記録として残したい方</li>
+      <li>将来的に作品公開や販売、複製制作を検討している方</li>
+      <li>まずは1点から、試験的に評価を受けてみたい方</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>OPASとは</h2>
+  <div class="card">
+    <p>
+      OPAS（Oil Painting Art Skills）は、油絵作品を「美しさ」や「流行」だけでなく、
+      <strong>技能・制作背景・保存性・将来価値</strong>の観点から総合的に評価・記録する認証制度です。
+    </p>
+    <p>
+      公募展や受賞歴に依存せず、作家の歩みと作品そのものを正しく残すことを目的としています。
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>スターター作品募集について</h2>
+  <div class="card">
+    <p>
+      OPASスターターは、初めてOPAS認証を受ける方向けのエントリープランです。
+      まずは1作品から、油絵作品の記録と評価を行います。
+    </p>
+    <ul>
+      <li>対象：個人作家・ご家族管理作品・無所属の画家</li>
+      <li>応募点数：1点</li>
+      <li>審査方法：提出画像・ヒアリング情報による評価</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>料金プラン</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>スターター</th>
+          <th>スタンダード</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>対象</th>
+          <td>初回・試験的認証</td>
+          <td>継続・本格運用</td>
+        </tr>
+        <tr>
+          <th>認証点数</th>
+          <td>1点</td>
+          <td>3〜5点</td>
+        </tr>
+        <tr>
+          <th>作品評価</th>
+          <td>◯</td>
+          <td>◎（詳細）</td>
+        </tr>
+        <tr>
+          <th>デジタル記録</th>
+          <td>基本情報</td>
+          <td>拡張情報<br>（背景・技能）</td>
+        </tr>
+        <tr>
+          <th>公開</th>
+          <td>限定公開</td>
+          <td>一般公開可</td>
+        </tr>
+        <tr>
+          <th>費用（税込）</th>
+          <td><strong>11,000円</strong></td>
+          <td><strong>55,000円</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>お問い合わせ</h2>
+  <div class="card">
+    <p style="margin-bottom: 30px;">ご質問・ご相談はこちらのフォームからお送りください。</p>
+    <div style="text-align: center;">
+      <a class="btn" href="#">質問フォームへ</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>作品登録</h2>
+  <div class="card">
+    <p style="margin-bottom: 30px;">OPASスターター作品の登録はこちらから行ってください。</p>
+    <div style="text-align: center;">
+      <a class="btn" href="#">作品登録フォームへ</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>運営・アクセス</h2>
+  <div class="card">
+    <p>
+      <strong>運営：セコンドペンギン企画</strong><br />
+      OPAS（油絵技能認証）事務局
+    </p>
+    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--color-text-light);">
+      本サイトは、油絵作品の長期保存と正当な評価を目的として運営されています。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>© Second Penguin Project / OPAS</p>
+</footer>
+
+</body>
+</html>
